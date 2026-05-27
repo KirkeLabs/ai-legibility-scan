@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "ai-legibility-scan"
+abstract: "Open-source AI/LLM legibility scanner: scores 8 weighted dimensions, generates schema.org JSON-LD and draft llms.txt, builds a shareable scorecard."
+type: software
+license: MIT
+repository-code: "https://github.com/KirkeLabs/ai-legibility-scan"
+url: "https://kirkelabs.github.io/ai-legibility-scan/"
+version: 0.1.0
+date-released: 2026-05-27
+authors:
+  - given-names: Soleman
+    family-names: El Gelawi
+    email: soleman@kirkelabs.com
+    affiliation: "Kirke Labs"
+    # sameAs: https://www.linkedin.com/in/soleman-gelawi/ , https://github.com/sgelawi
+  - given-names: Steve
+    family-names: Kirton
+    email: steve@kirkelabs.com
+    affiliation: "Kirke Labs"
+    # sameAs: https://www.linkedin.com/in/stevekirton-kirkelabs/
+keywords:
+  - ai-visibility
+  - llms-txt
+  - schema-org
+  - structured-data
+  - generative-engine-optimization
+  - algorand

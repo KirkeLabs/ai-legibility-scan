@@ -1,0 +1,7 @@
+node_modules/
+ai-legibility-out/
+*.log
+.DS_Store
+coverage/
+dist/
+.env

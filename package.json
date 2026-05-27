@@ -1,0 +1,66 @@
+{
+  "name": "@kirkelabs/ai-legibility-scan",
+  "version": "0.1.0",
+  "description": "Scan any URL for how legible it is to AI agents (ChatGPT, Claude, Perplexity, Gemini). Scores 8 dimensions, generates schema.org JSON-LD and a draft llms.txt, and builds a shareable scorecard. A gift to the Algorand ecosystem from Kirke Labs.",
+  "type": "module",
+  "bin": {
+    "ai-legibility-scan": "bin/cli.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "docs/scorecard-template.html",
+    "LICENSE",
+    "README.md",
+    "AUTHORS",
+    "CITATION.cff"
+  ],
+  "scripts": {
+    "scan": "node bin/cli.js",
+    "test": "node --test \"test/*.test.js\"",
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "keywords": [
+    "algorand",
+    "algokit",
+    "web3",
+    "geo",
+    "aeo",
+    "generative-engine-optimization",
+    "answer-engine-optimization",
+    "ai-visibility",
+    "llms-txt",
+    "schema-org",
+    "structured-data",
+    "seo",
+    "cli",
+    "nodejs"
+  ],
+  "author": "Soleman El Gelawi <soleman@kirkelabs.com> (https://www.kirkelabs.com)",
+  "contributors": [
+    "Steve Kirton <steve@kirkelabs.com> (https://www.kirkelabs.com)"
+  ],
+  "license": "MIT",
+  "homepage": "https://kirkelabs.github.io/ai-legibility-scan/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KirkeLabs/ai-legibility-scan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KirkeLabs/ai-legibility-scan/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0"
+  }
+}

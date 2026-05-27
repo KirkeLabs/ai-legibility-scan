@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-legibility-scan — Is your site legible to AI agents? · Kirke Labs</title>
+<meta name="description" content="Open-source CLI that scans any URL for how legible it is to AI agents (ChatGPT, Claude, Perplexity). Scores 8 dimensions, generates schema.org JSON-LD and llms.txt. MIT. A gift to the Algorand ecosystem from Kirke Labs.">
+<meta name="author" content="Soleman El Gelawi">
+<meta property="og:title" content="ai-legibility-scan — Is your site legible to AI agents?">
+<meta property="og:description" content="One command. Eight dimensions. The structured data to fix it. Open-source, MIT, from Kirke Labs.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ai-legibility-scan",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Node.js >= 20",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "license": "https://opensource.org/licenses/MIT",
+  "author": {
+    "@type": "Person",
+    "name": "Soleman El Gelawi",
+    "jobTitle": "CTO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Kirke Labs",
+      "url": "https://www.kirkelabs.com"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/soleman-gelawi/",
+      "https://github.com/sgelawi",
+      "TODO:KIRKELABS_TEAM_PAGE_URL"
+    ]
+  },
+  "contributor": {
+    "@type": "Person",
+    "name": "Steve Kirton",
+    "jobTitle": "Founder & CEO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Kirke Labs",
+      "url": "https://www.kirkelabs.com"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/stevekirton-kirkelabs/",
+      "TODO:KIRKELABS_TEAM_PAGE_URL"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kirke Labs",
+    "url": "https://www.kirkelabs.com"
+  },
+  "url": "https://kirkelabs.github.io/ai-legibility-scan/",
+  "codeRepository": "https://github.com/KirkeLabs/ai-legibility-scan"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E0D;--bg2:#0F1513;--panel:#121A17;--line:#23302B;--line2:#2E3D37;
+    --txt:#E6EDE9;--soft:#A7B5AF;--mute:#6C7C75;--acc:#00D08A;--accd:#0B9C68;--warn:#E0A93C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Archivo',sans-serif;line-height:1.7;
+    background-image:radial-gradient(900px 480px at 80% -5%,rgba(0,208,138,.07),transparent 60%)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px}
+  a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+  code,kbd{font-family:'JetBrains Mono',monospace}
+  .bar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,14,13,.85);
+    backdrop-filter:blur(8px);z-index:10}
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px}
+  .brand svg{display:block}
+  .nav{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--mute);display:flex;gap:22px}
+  .nav a{color:var(--mute)}.nav a:hover{color:var(--acc);text-decoration:none}
+  header.hero{padding:90px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  header.hero::after{content:"";position:absolute;right:-150px;top:-110px;width:460px;height:460px;
+    border:1px solid var(--line2);border-radius:50%;opacity:.5}
+  .chip{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);
+    border:1px solid var(--accd);background:rgba(0,208,138,.05);padding:7px 14px;border-radius:100px;margin-bottom:26px}
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+  h1{font-weight:900;letter-spacing:-.03em;font-size:clamp(38px,6.6vw,66px);line-height:1.02;margin-bottom:20px}
+  h1 .g{background:linear-gradient(96deg,var(--acc),#7af0cd);-webkit-background-clip:text;
+    background-clip:text;color:transparent}
+  .deck{font-size:clamp(17px,2.2vw,21px);color:var(--soft);max-width:600px;margin-bottom:32px}
+  .cmd{display:flex;align-items:center;gap:14px;background:#06100C;border:1px solid var(--line);
+    border-left:3px solid var(--acc);border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;
+    font-size:15px;max-width:620px;overflow-x:auto}
+  .cmd .p{color:var(--acc)}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:16px}
+  h2{font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4vw,38px);margin-bottom:18px}
+  p{color:var(--soft);margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 22px}
+  .card h3{font-size:16px;margin-bottom:8px;display:flex;align-items:baseline;gap:10px}
+  .card .n{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc)}
+  .card .w{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);margin-left:auto}
+  .card p{font-size:14px;margin:0;color:var(--soft)}
+  .steps{counter-reset:s;margin-top:24px}
+  .steps li{list-style:none;counter-increment:s;position:relative;padding:14px 0 14px 46px;
+    border-bottom:1px solid var(--line);color:var(--soft)}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:30px;height:30px;
+    background:var(--acc);color:var(--bg);font-weight:800;border-radius:8px;display:flex;
+    align-items:center;justify-content:center;font-size:14px}
+  .steps li b{color:var(--txt)}
+  footer{background:#070C0A;padding:34px 0;font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .note{font-size:13px;color:var(--mute);font-style:italic;margin-top:18px}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <div class="brand">
+    <svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="24" height="24" rx="6" stroke="#00D08A" stroke-width="1.6"/><path d="M8 6V20M8 13L17 6M8 13L17 20" stroke="#00D08A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    ai-legibility-scan
+  </div>
+  <div class="nav">
+    <a href="#how">How it scores</a>
+    <a href="https://github.com/KirkeLabs/ai-legibility-scan">GitHub</a>
+    <a href="https://www.kirkelabs.com">Kirke Labs</a>
+  </div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="chip"><span class="pulse"></span>Open-source · MIT · A gift to the Algorand ecosystem</div>
+  <h1>Is your site legible<br>to <span class="g">an AI agent?</span></h1>
+  <p class="deck">Buyers don't Google you anymore — they ask an AI that reads the web for them. One command tells you what that AI can actually see, and hands you the structured data to fix it.</p>
+  <div class="cmd"><span class="p">$</span>&nbsp;npx @kirkelabs/ai-legibility-scan https://your-site.com</div>
+  <p class="note">No install. No account. No data leaves your machine. Node ≥ 20.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">Why it exists</div>
+  <h2>Monitoring tools tell you you're invisible. This one fixes it.</h2>
+  <p>Most "AI visibility" products are $300-a-month dashboards that watch and report. <code>ai-legibility-scan</code> is a free CLI that fetches your page <em>the way GPTBot and ClaudeBot do</em> — one plain request, no JavaScript — scores eight dimensions, and writes the schema.org JSON-LD and draft <code>llms.txt</code> you need to close the gaps. It's also the only scanner we know of that checks <b>on-chain legibility</b>: whether your Algorand proof is server-rendered and explorer-linked, or trapped invisibly inside a JS dashboard.</p>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="eyebrow">How it scores</div>
+  <h2>Eight weighted dimensions</h2>
+  <div class="grid">
+    <div class="card"><h3><span class="n">01</span> Server-rendered content <span class="w">w10</span></h3><p>Is the meaningful text in raw HTML, or hidden behind JavaScript an AI never runs?</p></div>
+    <div class="card"><h3><span class="n">02</span> Schema.org data <span class="w">w10</span></h3><p>Valid JSON-LD; Organization/Person/Product; the sameAs identity graph.</p></div>
+    <div class="card"><h3><span class="n">03</span> Entity identity <span class="w">w10</span></h3><p>Links to Wikidata, Crunchbase, LinkedIn, GitHub — corroboration that you exist.</p></div>
+    <div class="card"><h3><span class="n">04</span> Answer-shaped <span class="w">w8</span></h3><p>Opening answer, question-headings, tables — the shapes engines lift.</p></div>
+    <div class="card"><h3><span class="n">05</span> Fact density <span class="w">w7</span></h3><p>Statistics and explicit sourcing per 200 words (GEO research).</p></div>
+    <div class="card"><h3><span class="n">06</span> Crawler access <span class="w">w7</span></h3><p>Does robots.txt block the AI bots and zero out everything else?</p></div>
+    <div class="card"><h3><span class="n">07</span> llms.txt <span class="w">w4</span></h3><p>Present and well-formed — a low-cost, unproven hedge, weighted honestly.</p></div>
+    <div class="card"><h3><span class="n">08</span> On-chain legibility <span class="w">w5</span></h3><p>Algorand proof server-rendered and explorer-linked, not JS-only.</p></div>
+  </div>
+  <p class="note">Full rubric, thresholds and the evidence behind every weight: <a href="https://github.com/KirkeLabs/ai-legibility-scan/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>. These are documented judgement calls — disagree in an issue.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">What you get back</div>
+  <h2>A score, and the files to fix it</h2>
+  <ul class="steps">
+    <li><b>score.json</b> — machine-readable; gate your CI on it.</li>
+    <li><b>report.md</b> — human-readable findings, per dimension.</li>
+    <li><b>schema.org.jsonld</b> — an Organization scaffold to complete and deploy.</li>
+    <li><b>llms.txt</b> — a draft mined from your own pages.</li>
+    <li><b>scorecard.html</b> — a self-contained scorecard you can share.</li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Honest limits</div>
+  <h2>What it does not claim</h2>
+  <p>This measures <b>heuristic indicators</b> of AI legibility. A high score makes a page easier for a model to read, trust and cite — it is <b>not a guarantee</b> of citation, and no tool can promise that. It does not render JavaScript (by design — if your content needs JS to appear, that is the finding) and it does not query ChatGPT to check if you're mentioned. It's a static-legibility auditor, and it says so.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <span>ai-legibility-scan · MIT · Built by Soleman El Gelawi (CTO, Kirke Labs), with Steve Kirton · www.kirkelabs.com</span>
+  <span><a href="https://www.kirkelabs.com">www.kirkelabs.com</a> · <a href="https://github.com/KirkeLabs/ai-legibility-scan">github.com/KirkeLabs/ai-legibility-scan</a></span>
+</div></footer>
+
+</body>
+</html>
