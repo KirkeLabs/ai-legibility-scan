@@ -109,6 +109,10 @@ console.log(result.score, result.grade);
 
 This tool measures **heuristic indicators** of AI legibility. A high score makes a page easier for an AI to read, trust and cite — it is **not a guarantee** of citation, and no tool can promise that. The weights are informed by public GEO/AEO research but are judgement calls, documented openly so you can disagree with them. See [Methodology](./docs/METHODOLOGY.md) and [`SECURITY.md`](./SECURITY.md).
 
+## Fix your score — there's a prompt for that
+
+Once you've audited your site, [docs/PROMPT_TEMPLATE.md](./docs/PROMPT_TEMPLATE.md) is a Claude-Code-ready prompt with handlebars-style placeholders. Fill in your site URL, org name, and team members, then paste it into a Claude Code session in your site's source repo — it walks the model through every dimension the scanner grades on and verifies the lift.
+
 ## Contributing
 
 Issues and PRs welcome — especially scoring false positives, new checks, and additional ecosystem explorers. See [CONTRIBUTING.md](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md).
