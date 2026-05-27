@@ -109,9 +109,14 @@ console.log(result.score, result.grade);
 
 This tool measures **heuristic indicators** of AI legibility. A high score makes a page easier for an AI to read, trust and cite — it is **not a guarantee** of citation, and no tool can promise that. The weights are informed by public GEO/AEO research but are judgement calls, documented openly so you can disagree with them. See [Methodology](./docs/METHODOLOGY.md) and [`SECURITY.md`](./SECURITY.md).
 
-## Fix your score — there's a prompt for that
+## Audit, recon, fix — three steps to lift your score
 
-Once you've audited your site, [docs/PROMPT_TEMPLATE.md](./docs/PROMPT_TEMPLATE.md) is a Claude-Code-ready prompt with handlebars-style placeholders. Fill in your site URL, org name, and team members, then paste it into a Claude Code session in your site's source repo — it walks the model through every dimension the scanner grades on and verifies the lift.
+Once the scanner has graded your site, two prompt templates let Claude Code in your source repo do the rest:
+
+1. **[docs/RECON_PROMPT.md](./docs/RECON_PROMPT.md)** — paste into a Claude Code session in your site's source repo. It's a read-only reconnaissance prompt that greps the codebase and returns a structured 10-section report: framework, team, on-chain footprint, existing meta tags, routes, brand-asset paths, identity URLs already present in the repo, and more.
+2. **[docs/PROMPT_TEMPLATE.md](./docs/PROMPT_TEMPLATE.md)** — the fix prompt, with 14 handlebars-style placeholders you fill in (some from the recon report, some you know off the top of your head). Paste the filled-in template into a *new* Claude Code session to actually do the fix.
+
+The recon step is optional but recommended for anything beyond a brochure site. It adds ~10 minutes of round-trip and saves hours of mid-implementation course-corrections — the fix prompt is dramatically better when it's grounded in your actual file paths, framework, and on-chain footprint instead of generic assumptions.
 
 ## Contributing
 

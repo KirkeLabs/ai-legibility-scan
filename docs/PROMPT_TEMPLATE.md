@@ -1,16 +1,19 @@
-# Claude Code Prompt Template — Fix Your LLM Visibility
+# Claude Code Prompt Template — Fix Your LLM Visibility (Step 2 of the Fix Workflow)
 
 A copy-pasteable prompt that walks Claude Code through fixing every dimension `@kirkelabs/ai-legibility-scan` grades on. Fill in the placeholders, paste into a Claude Code session in your site's source repo, and let Claude lift the score.
+
+> **Recommended first step: run the recon prompt.** [docs/RECON_PROMPT.md](./RECON_PROMPT.md) is a read-only reconnaissance prompt that greps your codebase and returns a structured report of your framework, team, on-chain footprint, existing meta tags, routes, and identity URLs. The fix prompt is dramatically better when grounded in real codebase facts — use the recon report to fill in the placeholders below (and to drop sections that don't apply, like on-chain proof for a non-blockchain site). For tiny brochure sites you can skip the recon and fill in this template by hand; for anything non-trivial, recon first.
 
 ## How to use this template
 
 1. **Audit first.** Run `npx @kirkelabs/ai-legibility-scan https://your-site.com` against your homepage. Note the score and the worst-scoring dimensions.
-2. **Search-and-replace** every `{{PLACEHOLDER}}` in the prompt below with your own values (full list in the next section).
-3. **Paste** the filled-in prompt into a fresh Claude Code session inside your site's source repository.
-4. Claude Code identifies your framework, makes the changes, and runs verification.
-5. **Deploy.** Re-run the scanner against the deployed URL to confirm the score lift.
+2. **(Recommended) Run the recon prompt** in [docs/RECON_PROMPT.md](./RECON_PROMPT.md) inside your site's source repo. Use its report to fill in the placeholders below accurately.
+3. **Search-and-replace** every `{{PLACEHOLDER}}` in the prompt below with your own values (full list in the next section).
+4. **Paste** the filled-in prompt into a *new* Claude Code session inside your site's source repository.
+5. Claude Code identifies your framework, makes the changes, and runs verification.
+6. **Deploy.** Re-run the scanner against the deployed URL to confirm the score lift.
 
-Total filling-in time: ~5 minutes for a two-person team.
+Total filling-in time: ~5 minutes for a two-person team (or ~15 minutes including a recon round-trip).
 
 ## Placeholders — fill these in before pasting
 
