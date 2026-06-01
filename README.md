@@ -109,6 +109,14 @@ console.log(result.score, result.grade);
 
 This tool measures **heuristic indicators** of AI legibility. A high score makes a page easier for an AI to read, trust and cite — it is **not a guarantee** of citation, and no tool can promise that. The weights are informed by public GEO/AEO research but are judgement calls, documented openly so you can disagree with them. See [Methodology](./docs/METHODOLOGY.md) and [`SECURITY.md`](./SECURITY.md).
 
+## Companion tool — agent-readiness-scan
+
+Once your page is legible (this tool), the next question is: can an AI agent *act* on you? **[`@kirkelabs/agent-readiness-scan`](https://github.com/KirkeLabs/agent-readiness-scan)** is the customs-house companion — it audits your declared crawler posture, MCP/ACP manifests, agent-actionable Product/Offer, and brand identity corroboration across registries. Together the two tools cover the audit-recon-fix loop for both halves of the 2026 web: legibility + declared access.
+
+```bash
+npx @kirkelabs/agent-readiness-scan https://your-site.com
+```
+
 ## Audit, recon, fix — three steps to lift your score
 
 Once the scanner has graded your site, two prompt templates let Claude Code in your source repo do the rest:
