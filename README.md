@@ -1,9 +1,11 @@
 # ai-legibility-scan
 
 [![npm version](https://img.shields.io/npm/v/@kirkelabs/ai-legibility-scan?color=00dc94&style=flat)](https://www.npmjs.com/package/@kirkelabs/ai-legibility-scan)
+[![npm downloads](https://img.shields.io/npm/dm/@kirkelabs/ai-legibility-scan?color=00dc94&style=flat)](https://www.npmjs.com/package/@kirkelabs/ai-legibility-scan)
 [![License: MIT](https://img.shields.io/badge/license-MIT-00dc94?style=flat)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-00dc94?style=flat)](https://nodejs.org)
-[![CI](https://img.shields.io/badge/CI-passing-00dc94?style=flat)](./.github/workflows/ci.yml)
+[![CI](https://github.com/KirkeLabs/ai-legibility-scan/actions/workflows/ci.yml/badge.svg)](https://github.com/KirkeLabs/ai-legibility-scan/actions/workflows/ci.yml)
+[![Provenance](https://img.shields.io/badge/npm%20provenance-ready-00dc94?style=flat)](https://docs.npmjs.com/generating-provenance-statements)
 
 **How legible is your site to an AI agent?** Run one command and find out — then get the structured data and `llms.txt` you need to fix it.
 
@@ -104,6 +106,12 @@ import { scan } from '@kirkelabs/ai-legibility-scan';
 const result = await scan('https://your-site.com', { agent: 'gptbot' });
 console.log(result.score, result.grade);
 ```
+
+## Provenance & supply chain
+
+Releases are published from GitHub Actions with `id-token: write` and `npm publish --provenance --access public`, so new npm releases can carry Sigstore-backed provenance linking the tarball to the public repository, workflow, and commit. Verify installed package signatures and attestations with `npm audit signatures` on a recent npm CLI.
+
+The package metadata points to this public repository, issue tracker, methodology, citation file, and MIT licence so npm users can inspect where the scanner came from before running it.
 
 ## Limitations (read this)
 

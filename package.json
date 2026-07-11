@@ -12,17 +12,22 @@
   "files": [
     "bin/",
     "src/",
-    "docs/scorecard-template.html",
+    "docs/",
     "LICENSE",
     "README.md",
     "AUTHORS",
     "CITATION.cff"
   ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "scan": "node bin/cli.js",
     "test": "node --test \"test/*.test.js\"",
     "lint": "eslint . --ext .js",
-    "format": "prettier --write \"**/*.{js,json,md}\""
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "prepublishOnly": "npm run lint && npm test"
   },
   "keywords": [
     "algorand",
@@ -58,6 +63,9 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0"
+  },
+  "overrides": {
+    "undici": "^7.28.0"
   },
   "devDependencies": {
     "eslint": "^9.0.0",
